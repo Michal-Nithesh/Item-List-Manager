@@ -1,34 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import  "h8k-components";
+import Header from './Header';
+import { useState } from 'react';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [items, setItems] = useState([]);
+  const [input, setInput] = useState("");
+
+  function handleAddItems(){
+      if(input.length === 0){
+        return;
+      }
+
+      setItems((preItem) => [...preItem, items]);
+      setInput("");
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <>
+      <Header />
+      <div className='item-content'>
+      <h3>Item List</h3>
+      <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter item"
+        />
+      <button onClick={handleAddItems}>Add Item</button>
+      <ul>
+        {items.map((item, index) => (
+        <li key={index}>
+          {item}
+        </li>
+))}
+      </ul>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </>
   )
 }
 
