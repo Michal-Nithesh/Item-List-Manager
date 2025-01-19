@@ -8,37 +8,35 @@ function App() {
   const [items, setItems] = useState([]);
   const [input, setInput] = useState("");
 
-  function handleAddItems(){
-      if(input.length === 0){
-        return;
-      }
+  function handleAddItems() {
+    if (input.length === 0) {
+      return;
+    }
 
-      setItems((preItem) => [...preItem, items]);
-      setInput("");
+    setItems((prevItems) => [...prevItems, input]);
+    setInput("");
   }
 
   return (
-      <>
+    <>
       <Header />
-      <div className='item-content'>
-      <h3>Item List</h3>
-      <input
+      <div className="item-content">
+        <h3>Item List</h3>
+        <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter item"
         />
-      <button onClick={handleAddItems}>Add Item</button>
-      <ul>
-        {items.map((item, index) => (
-        <li key={index}>
-          {item}
-        </li>
-))}
-      </ul>
+        <button onClick={handleAddItems}>Add Item</button>
+        <ol>
+          {items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ol>
       </div>
-      </>
-  )
+    </>
+  );
 }
 
 export default App
